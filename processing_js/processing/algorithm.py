@@ -261,7 +261,10 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         js = """
         function process(feature)
         {
-         return JSON.stringify(func(JSON.parse(feature)));
+          res = func(JSON.parse(feature))
+          if ( res && res.stack && res.message )
+            return res;
+         return JSON.stringify(res);
         }
         """
 
@@ -306,11 +309,15 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         """
         self.json_exporter.setSourceCrs(self.input_crs)
         geojson = self.json_exporter.exportFeature(feature)
-        res = self.process_js_function.call([geojson]).toVariant()
+        res = self.process_js_function.call([geojson])
         if not res:
             return []
+        if res.isError():
+            error = "Uncaught exception at line {}:{}".format(res.property("lineNumber").toInt(),
+                                                            res.toString())
+            raise QgsProcessingException(error)
 
-        return QgsJsonUtils.stringToFeatureList(res, self.fields, self.codec)
+        return QgsJsonUtils.stringToFeatureList(res.toString(), self.fields, self.codec)
 
     def shortHelpString(self):
         """
