@@ -45,7 +45,7 @@ from qgis.core import (QgsProcessing,
                        QgsJsonUtils,
                        QgsProcessingUtils)
 from qgis.PyQt.QtCore import QCoreApplication, QDir, QTextCodec
-from PyQt5.QtQml import QJSEngine
+from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from processing.core.parameters import getParameterFromString
 from processing_js.processing.outputs import create_output_from_string
@@ -258,6 +258,9 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         Prepares the algorithm
         """
         self.engine = QJSEngine()
+        js_feedback = self.engine.newQObject(feedback)
+        QQmlEngine.setObjectOwnership(feedback, QQmlEngine.CppOwnership)
+        self.engine.globalObject().setProperty("feedback", js_feedback)
         js = """
         function process(feature)
         {

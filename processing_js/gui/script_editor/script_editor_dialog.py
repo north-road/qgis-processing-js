@@ -300,6 +300,11 @@ function func(feature)
   // feature is the geojson feature, return a geojson output features (or collection of features)
   // parameter values will be available here!
   feature.properties.ROAD_NAME = my_string;
+  
+  // the global 'feedback' object gives access to a QgsProcessingFeedback object, which can be
+  // used to report errors and log messages for the user
+  feedback.pushInfo('Processed a feature!');
+  
   return feature;
 }
         """
