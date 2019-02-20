@@ -102,13 +102,13 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         """
         Returns the algorithm's icon
         """
-        return GuiUtils.get_icon("providerR.svg")
+        return GuiUtils.get_icon("providerJS.svg")
 
     def svgIconPath(self):
         """
         Returns a path to the algorithm's icon as a SVG file
         """
-        return GuiUtils.get_icon_svg("providerR.svg")
+        return GuiUtils.get_icon_svg("providerJS.svg")
 
     def name(self):
         """

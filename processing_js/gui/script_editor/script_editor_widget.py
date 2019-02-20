@@ -32,7 +32,7 @@ from qgis.PyQt.QtGui import QFont, QColor, QKeySequence, QFontDatabase, QFontMet
 from qgis.PyQt.QtWidgets import QShortcut
 from qgis.core import QgsApplication, QgsSettings
 
-from qgis.PyQt.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
+from qgis.PyQt.Qsci import QsciScintilla, QsciLexerJavaScript, QsciAPIs
 
 
 # This class is ported from the QGIS core Processing script editor.
@@ -194,7 +194,7 @@ class ScriptEdit(QsciScintilla):
 
     def initLexer(self):
         settings = QgsSettings()
-        self.lexer = QsciLexerPython()
+        self.lexer = QsciLexerJavaScript()
 
         font = QFontDatabase.systemFont(QFontDatabase.FixedFont)
 
@@ -234,14 +234,14 @@ class ScriptEdit(QsciScintilla):
         self.lexer.setFont(font, 1)
         self.lexer.setFont(font, 3)
         self.lexer.setFont(font, 4)
-        self.lexer.setFont(font, QsciLexerPython.UnclosedString)
+        self.lexer.setFont(font, QsciLexerJavaScript.UnclosedString)
 
         for style in range(0, 33):
             paperColor = QColor(
                 settings.value("pythonConsole/paperBackgroundColorEditor", QColor(self.BACKGROUND_COLOR)))
             self.lexer.setPaper(paperColor, style)
 
-        # self.api = QsciAPIs(self.lexer)
+        self.api = QsciAPIs(self.lexer)
 
         # useDefaultAPI = bool(settings.value('pythonConsole/preloadAPI',
         #                                    True))

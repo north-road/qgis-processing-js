@@ -131,7 +131,8 @@ class ScriptEditorDialog(BASE, WIDGET):
         self.filePath = None
         if filePath is not None:
             self._loadFile(filePath)
-
+        else:
+            self._load_template()
         self.setHasChanged(False)
 
     def update_dialog_title(self):
@@ -286,4 +287,20 @@ class ScriptEditorDialog(BASE, WIDGET):
         self.editor.recolor()
 
         self.filePath = filePath
+        self.update_dialog_title()
+
+    def _load_template(self):
+        txt = """       
+function func(feature)
+{
+  // feature is the geojson feature, return a geojson output features (or collection of features)
+  feature.properties.ROAD_NAME = 'blah';
+  return feature;
+}
+        """
+        self.editor.setText(txt)
+        self.hasChanged = False
+        self.editor.setModified(False)
+        self.editor.recolor()
+
         self.update_dialog_title()

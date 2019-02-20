@@ -90,13 +90,13 @@ class JsAlgorithmProvider(QgsProcessingProvider):
         """
         Returns the provider's icon
         """
-        return GuiUtils.get_icon("providerR.svg")
+        return GuiUtils.get_icon("providerJS.svg")
 
     def svgIconPath(self):
         """
         Returns a path to the provider's icon as a SVG file
         """
-        return GuiUtils.get_icon_svg("providerR.svg")
+        return GuiUtils.get_icon_svg("providerJS.svg")
 
     def name(self):
         """
