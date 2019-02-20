@@ -1,0 +1,39 @@
+# This file contains metadata for your plugin. Since
+# version 2.0 of QGIS this is the proper way to supply
+# information about a plugin. The old method of
+# embedding metadata in __init__.py will
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Processing Javascript Provider
+qgisMinimumVersion=3.4
+description=A Processing provider for Javascript based feature manipulation
+version=1.0.2
+author=North Road
+email=nyall@north-road.com
+
+about=Processing provider for Javascript
+
+tracker=https://github.com/north-road/qgis-processing-js/issues
+repository=https://github.com/north-road/qgis-processing-js
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+changelog=0.0.1 Initial release
+
+# Tags are comma separated with spaces allowed
+tags=javascript,processing
+
+homepage=https://github.com/north-road/qgis-processing-js
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
