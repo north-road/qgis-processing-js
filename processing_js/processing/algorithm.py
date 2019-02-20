@@ -171,7 +171,7 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         ender = 0
         line = next(lines).strip('\n').strip('\r')
         while ender < 10:
-            if line.startswith('##'):
+            if line.startswith('//#'):
                 try:
                     self.process_metadata_line(line)
                 except Exception:  # pylint: disable=broad-except
@@ -194,7 +194,7 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
         """
         Processes a "metadata" (##) line
         """
-        line = line.replace('#', '')
+        line = line.replace('//#', '')
 
         # special commands
         #if line.lower().strip().startswith('dontuserasterpackage'):
@@ -264,6 +264,23 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
          return JSON.stringify(func(JSON.parse(feature)));
         }
         """
+
+        for param in self.parameterDefinitions():
+            if param.isDestination():
+                continue
+
+            if param.name() not in parameters or parameters[param.name()] is None:
+                js += '{}=None;\n'.format(param.name())
+                continue
+
+            if isinstance(param,
+                            (QgsProcessingParameterField, QgsProcessingParameterString, QgsProcessingParameterFile)):
+                value = self.parameterAsString(parameters, param.name(), context)
+                js += '{}="{}";'.format(param.name(), value)
+            elif isinstance(param, QgsProcessingParameterNumber):
+                value = self.parameterAsDouble(parameters, param.name(), context)
+                js += '{}={};'.format(param.name(), value)
+
         js += self.js_script
         result = self.engine.evaluate(js)
 

@@ -290,11 +290,16 @@ class ScriptEditorDialog(BASE, WIDGET):
         self.update_dialog_title()
 
     def _load_template(self):
-        txt = """       
+        txt = """ 
+//#my_algorithm=name
+//#my_group=group
+//#my_number=number
+//#my_string=string
 function func(feature)
 {
   // feature is the geojson feature, return a geojson output features (or collection of features)
-  feature.properties.ROAD_NAME = 'blah';
+  // parameter values will be available here!
+  feature.properties.ROAD_NAME = my_string;
   return feature;
 }
         """
