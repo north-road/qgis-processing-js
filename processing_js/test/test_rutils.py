@@ -78,77 +78,6 @@ class RUtilsTest(unittest.TestCase):
         """
         self.assertEqual(JsUtils.strip_special_characters('aB 43 24a:sd'), 'aB4324asd')
 
-    def test_is_windows(self):
-        """
-        Test is_windows
-        """
-        self.assertFalse(JsUtils.is_windows())  # suck it, Windows users!
-
-    def test_is_macos(self):
-        """
-        Test is_macos
-        """
-        self.assertFalse(JsUtils.is_macos())  # suck it even more, MacOS users!
-
-    def test_guess_r_binary_folder(self):
-        """
-        Test guessing the R binary folder -- not much to do here, all the logic is Windows specific
-        """
-        self.assertFalse(JsUtils.guess_r_binary_folder())
-
-    def test_r_binary_folder(self):
-        """
-        Test retrieving R binary folder
-        """
-        self.assertFalse(JsUtils.r_binary_folder())
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, '/usr/local/bin')
-        self.assertEqual(JsUtils.r_binary_folder(), '/usr/local/bin')
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, None)
-        self.assertFalse(JsUtils.r_binary_folder())
-
-    def test_r_executable(self):
-        """
-        Test retrieving R executable
-        """
-        self.assertEqual(JsUtils.path_to_r_executable(), 'R')
-        self.assertEqual(JsUtils.path_to_r_executable(script_executable=True), 'Rscript')
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, '/usr/local/bin')
-        self.assertEqual(JsUtils.path_to_r_executable(), '/usr/local/bin/R')
-        self.assertEqual(JsUtils.path_to_r_executable(script_executable=True), '/usr/local/bin/Rscript')
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, None)
-        self.assertEqual(JsUtils.path_to_r_executable(), 'R')
-        self.assertEqual(JsUtils.path_to_r_executable(script_executable=True), 'Rscript')
-
-    def test_package_repo(self):
-        """
-        Test retrieving/setting the package repo
-        """
-        self.assertEqual(JsUtils.package_repo(), 'http://cran.at.r-project.org/')
-        ProcessingConfig.setSettingValue(JsUtils.R_REPO, 'http://mirror.at.r-project.org/')
-        self.assertEqual(JsUtils.package_repo(), 'http://mirror.at.r-project.org/')
-        ProcessingConfig.setSettingValue(JsUtils.R_REPO, 'http://cran.at.r-project.org/')
-        self.assertEqual(JsUtils.package_repo(), 'http://cran.at.r-project.org/')
-
-    def test_use_user_library(self):
-        """
-        Test retrieving/setting the user library setting
-        """
-        self.assertTrue(JsUtils.use_user_library())
-        ProcessingConfig.setSettingValue(JsUtils.R_USE_USER_LIB, False)
-        self.assertFalse(JsUtils.use_user_library())
-        ProcessingConfig.setSettingValue(JsUtils.R_USE_USER_LIB, True)
-        self.assertTrue(JsUtils.use_user_library())
-
-    def test_library_folder(self):
-        """
-        Test retrieving/setting the library folder
-        """
-        self.assertIn('/profiles/default/processing/rlibs', JsUtils.r_library_folder())
-        ProcessingConfig.setSettingValue(JsUtils.R_LIBS_USER, '/usr/local')
-        self.assertEqual(JsUtils.r_library_folder(), '/usr/local')
-        ProcessingConfig.setSettingValue(JsUtils.R_LIBS_USER, None)
-        self.assertIn('/profiles/default/processing/rlibs', JsUtils.r_library_folder())
-
     def test_is_error_line(self):
         """
         Test is_error_line
@@ -156,17 +85,6 @@ class RUtilsTest(unittest.TestCase):
         self.assertFalse(JsUtils.is_error_line('xxx yyy'))
         self.assertTrue(JsUtils.is_error_line('Error something went wrong'))
         self.assertTrue(JsUtils.is_error_line('Execution halted'))
-
-    def test_r_is_installed(self):
-        """
-        Test checking that R is installed
-        """
-        self.assertIsNone(JsUtils.check_r_is_installed())
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, '/home')
-        self.assertTrue(JsUtils.check_r_is_installed())
-        self.assertIn('R is not installed', JsUtils.check_r_is_installed())
-        ProcessingConfig.setSettingValue(JsUtils.R_FOLDER, None)
-        self.assertIsNone(JsUtils.check_r_is_installed())
 
 
 if __name__ == "__main__":

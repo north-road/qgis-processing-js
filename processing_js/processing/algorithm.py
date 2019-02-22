@@ -92,12 +92,6 @@ class JsAlgorithm(QgsProcessingFeatureBasedAlgorithm):  # pylint: disable=too-ma
 
         return JsAlgorithm(description_file=None, script=self.script)
 
-    def xxinitAlgorithm(self, _=None):
-        """
-        Initializes the algorithm
-        """
-        pass  # pylint: disable=unnecessary-pass
-
     def icon(self):
         """
         Returns the algorithm's icon
