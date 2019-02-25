@@ -10,7 +10,7 @@
 name=Processing Javascript Provider
 qgisMinimumVersion=3.4
 description=A Processing provider for Javascript based feature manipulation
-version=1.0.3
+version=1.0.4
 author=North Road
 email=nyall@north-road.com
 
@@ -23,7 +23,7 @@ repository=https://github.com/north-road/qgis-processing-js
 # Recommended items:
 
 # Uncomment the following line and add your changelog:
-changelog=1.0.3 Fix plugin icon
+changelog=1.0.4 Fix scripts folder setting clashes with other plugins
 
 # Tags are comma separated with spaces allowed
 tags=javascript,processing

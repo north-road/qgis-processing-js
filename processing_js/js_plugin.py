@@ -19,7 +19,7 @@ from qgis.PyQt.QtCore import (QTranslator,
 from qgis.core import QgsApplication
 from qgis.gui import QgisInterface
 from processing_js.processing.provider import JsAlgorithmProvider
-VERSION = '1.0.2'
+VERSION = '1.0.4'
 
 
 class JsProviderPlugin:
