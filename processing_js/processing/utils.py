@@ -30,7 +30,7 @@ class JsUtils:  # pylint: disable=too-many-public-methods
     Utilities for the Javascript Provider and Algorithm
     """
 
-    SCRIPTS_FOLDER = 'SCRIPTS_FOLDER'
+    SCRIPTS_FOLDER = 'JS_SCRIPTS_FOLDER'
 
     VALID_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
